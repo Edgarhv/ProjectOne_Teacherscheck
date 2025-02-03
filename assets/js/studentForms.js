@@ -26,7 +26,7 @@ function saveStudentForm (event) {
 };
 
 function goToStudentInfo (event) {
-    url = '../pages/studentInfo.html';
+    url = '/Users/michelleguzman/Desktop/projects/ProjectOne_Teacherscheck/assets/pages/studentInfo.html';
     moveUrl(url);
 }
 
