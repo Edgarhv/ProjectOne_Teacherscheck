@@ -6,10 +6,12 @@ let contact = document.getElementById('contact');
 let saveButton = document.getElementById('saveStudent');
 // Create an empty students array where will be save the students data
 const studentsArray = JSON.parse(localStorage.getItem('studentsArray')) || [];
+//select student info Button from html
+let studentInfoBtn = document.getElementById('studentInfoBtn');
 
 function saveStudentForm (event) {
     console.log('hi from the function saveStudentForm');
-    studentInfo = {
+    let studentInfo = {
         studentName : studentName.value,
         birthdate : birthdate.value,
         email : email.value,
@@ -23,7 +25,16 @@ function saveStudentForm (event) {
     console.log(JSON.parse(localStorage.getItem('studentsArray')));
 };
 
+function goToStudentInfo (event) {
+    url = '../pages/studentInfo.html';
+    moveUrl(url);
+}
+
+function moveUrl (url) {
+    document.location.href = (url);
+}
 saveButton.addEventListener('click', saveStudentForm);
+studentInfoBtn.addEventListener('click', goToStudentInfo);
 
 
 
