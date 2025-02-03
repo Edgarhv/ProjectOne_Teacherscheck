@@ -4,4 +4,4 @@ Group 2
 
   ## Daily Report
 
-![img](https://github.com/Edgarhv/Election_Analysis/blob/032fb2a6782adff97daa28deafedabcfa6f7939b/Images/results.png)
+![img](assets/images/Dailyreport.png)
