@@ -33,7 +33,7 @@ function goToStudentInfo (event) {
 function moveUrl (url) {
     document.location.href = (url);
 }
-
+saveButton.addEventListener('click', saveStudentForm);
 studentInfoBtn.addEventListener('click', goToStudentInfo);
 
 
