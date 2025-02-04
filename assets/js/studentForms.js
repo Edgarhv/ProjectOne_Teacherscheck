@@ -28,12 +28,12 @@ function saveStudentForm (event) {
 function goToStudentInfo (event) {
     url = '../pages/studentInfo.html';
     moveUrl(url);
-}
+};
 
 function moveUrl (url) {
     document.location.href = (url);
 }
-saveButton.addEventListener('click', saveStudentForm);
+
 studentInfoBtn.addEventListener('click', goToStudentInfo);
 
 
