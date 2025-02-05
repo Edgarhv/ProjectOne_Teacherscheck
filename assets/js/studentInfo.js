@@ -43,18 +43,17 @@ function generateTable(array) {
     tdCheckInput.checked = true;
     tdChecklabel.classList.add('btn', 'btn-outline-success');
     tdChecklabel.setAttribute('for', `btn-check-outlined${i}`);
-    tdChecklabel.textContent = ''; // Si deseas mostrar texto en el botón.
+    tdChecklabel.textContent = ''; // 
 
-    // Radio button
     tdErr.setAttribute('type', 'checkbox');
     tdErr.classList.add('btn-check');
-    // tdErr.setAttribute('name', `options-outlined${i}`); // Diferentes grupos de radios
+    // tdErr.setAttribute('name', `options-outlined${i}`); 
     tdErr.setAttribute('id', `btn-check-outlined2${i}`);
     tdErr.setAttribute('autocomplete', 'off');
     tdErr.classList.add('btn-check');
     tdErrLabel.classList.add('btn', 'btn-outline-danger');
     tdErrLabel.setAttribute('for', `btn-check-outlined2${i}`);
-    tdErrLabel.textContent = 'Del'; // Si deseas mostrar texto en el botón.
+    tdErrLabel.textContent = 'Del'; 
 
     // Estructura html
     tableBody.appendChild(tr);
@@ -70,7 +69,7 @@ function generateTable(array) {
     tdCheckColumn.appendChild(tdChecklabel);
     tr.appendChild(tdCheckColumn);
 
-    // Radio column
+    // Del column
     tdErrorColumn.appendChild(tdErr);
     tdErrorColumn.appendChild(tdErrLabel);
     tr.appendChild(tdErrorColumn);
@@ -113,7 +112,6 @@ function saveAttendance(event) {
 }
 
 function goToStudentInfo(event) {
-    // Supongamos que 'StudentInfo.html' está en la misma carpeta
     const url = 'dailyreport.html';
     document.location.href = url;
 }

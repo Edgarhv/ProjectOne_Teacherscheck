@@ -41,7 +41,7 @@ function saveStudentForm(event) {
 
 function goToStudentInfo(event) {
   // Supongamos que 'StudentInfo.html' está en la misma carpeta
-  const url = 'StudentInfo.html';
+  const url = 'studentInfo.html';
   document.location.href = url;
 }
 
