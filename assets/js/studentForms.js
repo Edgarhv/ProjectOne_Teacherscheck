@@ -16,14 +16,15 @@ const emailSyntax = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-
 
 
 function saveStudentForm(event) {
-  event.preventDefault();
+//   event.preventDefault();
 
   const studentInfo = {
     studentName: studentName.value,
     birthdate: birthdate.value,
     email: email.value,
     contact: contact.value,
-    absence : 0
+    absence : 0, 
+    del : false
   };
 
 
@@ -32,10 +33,10 @@ function saveStudentForm(event) {
   console.log('localStorage ahora:', JSON.parse(localStorage.getItem('studentsArray')));
 }
 
-function goToStudentInfo (event) {
-    url = '../pages/studentInfo.html';
-    moveUrl(url);
-};
+// function goToStudentInfo (event) {
+//     url = '../pages/studentInfo.html';
+//     moveUrl(url);
+// };
 
 
 function goToStudentInfo(event) {
@@ -45,7 +46,7 @@ function goToStudentInfo(event) {
 }
 
 
-saveButton.addEventListener('click', saveStudentForm);
+// saveButton.addEventListener('click', saveStudentForm);
 
 function notvalid() {
     if (!isString.test(studentName.value) || !emailSyntax.test(email.value) || (!isDigit.test(contact.value) && contact.value.length !== 10) || !birthdate.value) {
