@@ -8,9 +8,6 @@ const studentInfoBtn = document.getElementById('studentInfoBtn');
 // Cargamos o creamos el array
 const studentsArray = JSON.parse(localStorage.getItem('studentsArray')) || [];
 
-=======
-//select student info Button from html
-let studentInfoBtn = document.getElementById('studentInfoBtn');
 // Constants needed for validation
 const isString = /^[a-zA-Z ]+$/;
 const isDigit = /^\d{10}$/;
@@ -49,7 +46,7 @@ function goToStudentInfo(event) {
 
 
 saveButton.addEventListener('click', saveStudentForm);
-=======
+
 function notvalid() {
     if (!isString.test(studentName.value) || !emailSyntax.test(email.value) || (!isDigit.test(contact.value) && contact.value.length !== 10) || !birthdate.value) {
         return true;
