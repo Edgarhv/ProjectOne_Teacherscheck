@@ -33,10 +33,17 @@ function saveStudentForm(event) {
   console.log('localStorage ahora:', JSON.parse(localStorage.getItem('studentsArray')));
 }
 
+
 // function goToStudentInfo (event) {
 //     url = '../pages/studentInfo.html';
 //     moveUrl(url);
 // };
+
+function goToStudentInfo (event) {
+    url = 'studentInfo.html';
+    moveUrl(url);
+};
+
 
 
 function goToStudentInfo(event) {
