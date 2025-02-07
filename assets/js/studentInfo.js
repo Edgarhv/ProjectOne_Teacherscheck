@@ -4,12 +4,32 @@ let info = JSON.parse(localStorage.getItem('studentsArray')) || [];
 console.log(info);
 
 const tableBody = document.querySelector('#tableBody');
+
+// function genderValue (array) {
+//     gender = []
+//     array.forEach((selectItem, i) => {
+//     let selecterGender = selectItem.gender;
+//     if (selecterGender == 1){
+//         console.log('male')
+//         gender.push('male')
+//     }
+//     else if (selecterGender == 2){
+//         gender.push('female')
+//     }
+//     console.log(gender)
+    
+//    }
+   
+//    );
+// };
+
 function generateTable(array) {
 
   array.forEach((selectItem, i) => {
     let tr = document.createElement('tr');
     let th = document.createElement('th');
     let tdStudent = document.createElement('td');
+    let tdGender = document.createElement('td');
     let tdBirthdate = document.createElement('td');
     let tdEmail = document.createElement('td');
     let tdContact = document.createElement('td');
@@ -30,6 +50,7 @@ function generateTable(array) {
 
     // Extraemos las propiedades
     tdStudent.textContent = selectItem.studentName;
+    tdGender.textContent = selectItem.gender;
     tdBirthdate.textContent = selectItem.birthdate;
     tdEmail.textContent = selectItem.email;
     tdContact.textContent = selectItem.contact;
@@ -59,6 +80,7 @@ function generateTable(array) {
     tableBody.appendChild(tr);
     tr.appendChild(th);
     tr.appendChild(tdStudent);
+    tr.appendChild(tdGender);
     tr.appendChild(tdBirthdate);
     tr.appendChild(tdEmail);
     tr.appendChild(tdContact);
