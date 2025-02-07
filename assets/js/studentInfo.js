@@ -77,13 +77,13 @@ function generateTable(array) {
 }
 
 //Function to save total number of assits, absence for Daily Report
-const reportObject = {
+let reportObject = {
     assits : Number,
     absence : Number
 }
 function saveAttendance(event) {
-    let assist = 0;    
-    let absence = 0;   
+    assist = 0;    
+    absence = 0;   
     //We have to iterate backwards so we don't have a problmen with the id because of the splice function
     for (let i = info.length - 1; i >= 0; i--) {
         let obj = info[i];
