@@ -4,11 +4,12 @@ document.getElementById('loginButton').addEventListener('click', function() {
     
     // Obtener el nombre del maestro ingresado y quitar los espacios al principio y al final
     const teacherName = document.getElementById('teacherName').value.trim();
-    
     console.log('Nombre ingresado:', teacherName); // Muestra el nombre ingresado en la consola
 
     // Validar que el nombre esté en la lista de maestros
     if (teachers.includes(teacherName)) {
+        // Guarda el nombre del maestro
+        localStorage.setItem("teacherName",teacherName)
         // Si el nombre es válido, redirigir a la página de estudiantes
         window.location.href = '../pages/studentForms.html'; // Asegúrate de que esta ruta sea correcta
     } else {
