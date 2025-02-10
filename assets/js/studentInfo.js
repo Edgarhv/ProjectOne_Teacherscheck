@@ -36,11 +36,12 @@ function generateTable(array) {
     let tdAbsence = document.createElement('td');
     let tdCheckColumn = document.createElement('td'); // Celda para el checkbox
     let tdErrorColumn = document.createElement('td'); // Celda para el radio y label
-
+    // let tdPhoto = document.createElement('td'); //for photo
     let tdCheckInput = document.createElement('input');
     let tdChecklabel = document.createElement('label');
     let tdErr = document.createElement('input');
     let tdErrLabel = document.createElement('label');
+    
 
     // scope=row
     id = i + 1;
@@ -50,6 +51,7 @@ function generateTable(array) {
 
     // Extraemos las propiedades
     tdStudent.textContent = selectItem.studentName;
+    // tdPhoto.textContent = selectItem.photo;
     tdGender.textContent = selectItem.gender;
     tdBirthdate.textContent = selectItem.birthdate;
     tdEmail.textContent = selectItem.email;
@@ -79,6 +81,7 @@ function generateTable(array) {
     // Estructura html
     tableBody.appendChild(tr);
     tr.appendChild(th);
+    
     tr.appendChild(tdStudent);
     tr.appendChild(tdGender);
     tr.appendChild(tdBirthdate);

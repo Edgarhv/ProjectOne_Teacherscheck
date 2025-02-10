@@ -4,6 +4,8 @@ const email = document.getElementById('email');
 const contact = document.getElementById('contact');
 const saveButton = document.getElementById('saveStudent');
 const studentInfoBtn = document.getElementById('studentInfoBtn');
+const fileInput = document.getElementById('customFile2');
+
 let countruns = 0
 // Cargamos o creamos el array
 const studentsArray = JSON.parse(localStorage.getItem('studentsArray')) || [];
@@ -16,6 +18,7 @@ const emailSyntax = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-
 
 
 //We take the value on gender, if it == '1' it meas Male, if =='2' its Female
+
 function saveStudentForm(event) {
 //   event.preventDefault();
     if (gender.value == '1') {
@@ -23,13 +26,18 @@ function saveStudentForm(event) {
     } else if(gender.value == '2') {
         genderStr = 'F'
     } 
-
+    // console.log('file value')
+    // console.log(fileInput.value)
+    // img = document.createElement('img');
+    // img.Textcontent = fileInput.value
+    // document.appendChild(img)
   const studentInfo = {
     studentName: studentName.value,
     birthdate: birthdate.value,
     email: email.value,
     contact: contact.value,
     gender: genderStr,
+    // photo : new FileReader(fileInput.value),
     absence : 0, 
     del : false
   };
@@ -68,7 +76,6 @@ function notvalid() {
         gender.value = 'female'
     }
 
-    
     if (
         !isString.test(studentName.value) || 
         !emailSyntax.test(email.value) || 
@@ -76,7 +83,7 @@ function notvalid() {
         !birthdate.value ||
         gender.value === 1 ||
         gender.value === 2
-    
+
     ) 
         {
         return true;
@@ -120,6 +127,21 @@ function validationAlert() {
     }
 };
 
+// Display selected IMG
+function displaySelectedImage(event, elementId) {
+    const selectedImage = document.getElementById(elementId);
+    const fileInput = event.target;
+
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            selectedImage.src = e.target.result;
+        };
+
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+}
 saveButton.addEventListener('click', function(){
     console.log(notvalid());
     
