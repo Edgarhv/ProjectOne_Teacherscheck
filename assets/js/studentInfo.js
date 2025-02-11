@@ -57,7 +57,7 @@ function generateTable(array) {
     tdEmail.textContent = selectItem.email;
     tdContact.textContent = selectItem.contact;
     tdAbsence.textContent = selectItem.absence;
-    tdErrLabel.textContent = 'Danger Radio';
+    
 
     // Checkbox
     tdCheckInput.setAttribute('type', 'checkbox');
@@ -76,6 +76,9 @@ function generateTable(array) {
     tdErr.classList.add('btn-check');
     tdErrLabel.classList.add('btn', 'btn-outline-danger');
     tdErrLabel.setAttribute('for', `btn-check-outlined2${i}`);
+    tdErrLabel.setAttribute('data-bs-toggle', 'tooltip');
+    tdErrLabel.setAttribute('data-bs-placement', 'right');
+    tdErrLabel.setAttribute('title', 'Use this check-box to delete an student. You should activate the checkbox and then click \'save\' button.');
     tdErrLabel.textContent = 'Del'; 
 
     // Estructura html
@@ -98,6 +101,10 @@ function generateTable(array) {
     tdErrorColumn.appendChild(tdErr);
     tdErrorColumn.appendChild(tdErrLabel);
     tr.appendChild(tdErrorColumn);
+
+    setTimeout(() => {
+        new bootstrap.Tooltip(tdErrLabel);
+    }, 100);
   });
 }
 
