@@ -24,7 +24,6 @@ const tableBody = document.querySelector('#tableBody');
 // };
 
 function generateTable(array) {
-
   array.forEach((selectItem, i) => {
     let tr = document.createElement('tr');
     let th = document.createElement('th');
@@ -36,22 +35,21 @@ function generateTable(array) {
     let tdAbsence = document.createElement('td');
     let tdCheckColumn = document.createElement('td'); // Celda para el checkbox
     let tdErrorColumn = document.createElement('td'); // Celda para el radio y label
-    // let tdPhoto = document.createElement('td'); //for photo
+
+
     let tdCheckInput = document.createElement('input');
     let tdChecklabel = document.createElement('label');
     let tdErr = document.createElement('input');
     let tdErrLabel = document.createElement('label');
     
-
-    // scope=row
+ // scope=row
     id = i + 1;
     selectItem.id = id;
     th.setAttribute('scope', 'row');
-    th.textContent = id; // enumerar fila
+    th.textContent = id;// enumerar fila
 
-    // Extraemos las propiedades
+    // Extraemos las propiedade
     tdStudent.textContent = selectItem.studentName;
-    // tdPhoto.textContent = selectItem.photo;
     tdGender.textContent = selectItem.gender;
     tdBirthdate.textContent = selectItem.birthdate;
     tdEmail.textContent = selectItem.email;
@@ -62,26 +60,25 @@ function generateTable(array) {
     // Checkbox
     tdCheckInput.setAttribute('type', 'checkbox');
     tdCheckInput.classList.add('btn-check');
+     // tdErr.setAttribute('name', `options-outlined${i}`);
     tdCheckInput.setAttribute('id', `btn-check-outlined${i}`);
     tdCheckInput.checked = true;
     tdChecklabel.classList.add('btn', 'btn-outline-success');
     tdChecklabel.setAttribute('for', `btn-check-outlined${i}`);
-    tdChecklabel.textContent = ''; // 
+    tdChecklabel.textContent = '';
 
     tdErr.setAttribute('type', 'checkbox');
     tdErr.classList.add('btn-check');
-    // tdErr.setAttribute('name', `options-outlined${i}`); 
     tdErr.setAttribute('id', `btn-check-outlined2${i}`);
     tdErr.setAttribute('autocomplete', 'off');
-    tdErr.classList.add('btn-check');
     tdErrLabel.classList.add('btn', 'btn-outline-danger');
     tdErrLabel.setAttribute('for', `btn-check-outlined2${i}`);
-    tdErrLabel.textContent = 'Del'; 
+    tdErrLabel.textContent = 'Del';
+
 
     // Estructura html
     tableBody.appendChild(tr);
     tr.appendChild(th);
-    
     tr.appendChild(tdStudent);
     tr.appendChild(tdGender);
     tr.appendChild(tdBirthdate);
@@ -89,51 +86,65 @@ function generateTable(array) {
     tr.appendChild(tdContact);
     tr.appendChild(tdAbsence);
 
-    // Checkbox column
+    //Checkbox colum
     tdCheckColumn.appendChild(tdCheckInput);
     tdCheckColumn.appendChild(tdChecklabel);
     tr.appendChild(tdCheckColumn);
 
-    // Del column
+    //Del Colum
     tdErrorColumn.appendChild(tdErr);
     tdErrorColumn.appendChild(tdErrLabel);
     tr.appendChild(tdErrorColumn);
   });
 }
 
-//Function to save total number of assits, absence for Daily Report
+//Function to save information for Daily Report
 let reportObject = {
-    assits : Number,
-    absence : Number
-}
+    assists: 0,
+    absence: 0,
+    male: 0,
+    female: 0
+};
+
 function saveAttendance(event) {
-    assist = 0;    
-    absence = 0;   
-    //We have to iterate backwards so we don't have a problmen with the id because of the splice function
+    let assists = 0;
+    let absence = 0;
+    let male = 0;
+    let female = 0;
+
     for (let i = info.length - 1; i >= 0; i--) {
         let obj = info[i];
         let attendance = document.getElementById(`btn-check-outlined${i}`);
         let del = document.getElementById(`btn-check-outlined2${i}`);
+
         if (del.checked === true) {
-            // console.log('Eliminando estudiante:', obj);
-            info.splice(i, 1);  // eliminate actual element of the obj
-            continue;  // next student, don't interate over this one
+            info.splice(i, 1);
+            continue;
         }
+
         if (attendance.checked === true) {
-            // console.log('es true');
-            assist++;
+            assists++;
         } else {
-            obj.absence ++;  
+            obj.absence++;
             absence++;
         }
+
+        if (obj.gender === 'M') {
+            male++;
+        } else if (obj.gender === 'F') {
+            female++;
+        }
     }
-    // Guardar el reporte en localStorage
-    reportObject.assits = assist;
+    
+    //save the report in the local storage
+    reportObject.assists = assists;
     reportObject.absence = absence;
+    reportObject.male = male;
+    reportObject.female = female;
     localStorage.setItem('reportObject', JSON.stringify(reportObject));
-    // Guardar el array actualizado de estudiantes
     localStorage.setItem('studentsArray', JSON.stringify(info));
     console.log('Array actualizado:', JSON.parse(localStorage.getItem('studentsArray')));
+    console.log('Reporte actualizado:', JSON.parse(localStorage.getItem('reportObject')));
 }
 
 function goToStudentInfo(event) {
@@ -142,7 +153,7 @@ function goToStudentInfo(event) {
 }
 
 saveButton = document.querySelector('#save');
-saveButton.addEventListener('click',saveAttendance);
+saveButton.addEventListener('click', saveAttendance);
 
 generateTable(info);
 reportButton.addEventListener('click', goToStudentInfo);
