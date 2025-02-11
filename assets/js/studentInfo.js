@@ -75,6 +75,9 @@ function generateTable(array) {
     tdErrLabel.classList.add('btn', 'btn-outline-danger');
     tdErrLabel.setAttribute('for', `btn-check-outlined2${i}`);
     tdErrLabel.textContent = 'Del'; 
+    tdErrLabel.setAttribute('data-bs-toggle', 'tooltip');
+    tdErrLabel.setAttribute('data-bs-placement', 'right');
+    tdErrLabel.setAttribute('title', 'Use this check-box to delete an student. You should activate the checkbox and then click \'save\' button.');
 
     // Estructura html
     tableBody.appendChild(tr);
