@@ -9,6 +9,8 @@ document.getElementById('loginButton').addEventListener('click', function() {
 
     // Validar que el nombre esté en la lista de maestros
     if (teachers.includes(teacherName)) {
+        // Guarda el nombre del maestro
+        localStorage.setItem("teacherName",teacherName)
         // Si el nombre es válido, redirigir a la página de estudiantes
         window.location.href = '../pages/studentForms.html'; // Asegúrate de que esta ruta sea correcta
     } else {

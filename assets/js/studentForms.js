@@ -5,16 +5,23 @@ const contact = document.getElementById('contact');
 const saveButton = document.getElementById('saveStudent');
 const studentInfoBtn = document.getElementById('studentInfoBtn');
 const fileInput = document.getElementById('customFile2');
+const teacherName = document.getElementById('teacherSpanId');
+const closeButton = document.getElementById('closebutton');
+const cancelButton = document.getElementById('cancelbutton');
+const confirmButton = document.getElementById('savebutton');
+const modalEl = document.getElementById('modalID');
+const pElement = document.getElementById('pElement');
 
-let countruns = 0
+// Change teacher's name
+teacherName.textContent = localStorage.getItem('teacherName');
 // Cargamos o creamos el array
 const studentsArray = JSON.parse(localStorage.getItem('studentsArray')) || [];
 
 // Constants needed for validation
 const isString = /^[a-zA-Z ]+$/;
 const isDigit = /^\d{10}$/;
-// const emailSyntax = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const emailSyntax = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+const emailSyntax = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+// const emailSyntax = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 
 //We take the value on gender, if it == '1' it meas Male, if =='2' its Female
@@ -45,6 +52,12 @@ function saveStudentForm(event) {
   studentsArray.push(studentInfo);
   localStorage.setItem('studentsArray', JSON.stringify(studentsArray));
   console.log('localStorage ahora:', JSON.parse(localStorage.getItem('studentsArray')));
+
+  // Reset input value
+  studentName.value = "";
+  birthdate.value = "";
+  email.value = "";
+  contact.value = "";
 }
 
 
@@ -67,35 +80,21 @@ function goToStudentInfo(event) {
 // saveButton.addEventListener('click', saveStudentForm);
 
 function notvalid() {
-    console.log("");
-    console.log(countruns,") inside notvalid:");
-    console.log("name: ",!isString.test(studentName.value)," email: ", !emailSyntax.test(email.value)," number: ", !isDigit.test(contact.value)," date: ", !birthdate.value);
-    if (gender.value === 1) {
-        gender.value = 'male'
-    } else if (gender.value === 2) {
-        gender.value = 'female'
-    }
-
     if (
         !isString.test(studentName.value) || 
         !emailSyntax.test(email.value) || 
-        (!isDigit.test(contact.value) && contact.value.length !== 10) || 
-        !birthdate.value ||
-        gender.value === 1 ||
-        gender.value === 2
-
+        !isDigit.test(contact.value) || 
+        !birthdate.value
     ) 
-        {
+    {
         return true;
-
     };
-    return false;
-    
+        return false;
 };
 
 function validationAlert() {
     const errorObject = {};
-    console.log(gender.value)
+
     // if (gender.value !== 1) {
     //     console.log('gender no es 1')
 
@@ -114,7 +113,7 @@ function validationAlert() {
         errorObject.contactError = "\n - Enter a valid number"
     };
     if (gender.value != 1 && gender.value != 2) {
-        errorObject.genderError = '\n - Gender no valido'
+        errorObject.genderError = '\n - Enter valid gender'
     } 
     if (Object.keys(errorObject).length) {
         console.log("errorObject: ",errorObject);
@@ -142,25 +141,32 @@ function displaySelectedImage(event, elementId) {
         reader.readAsDataURL(fileInput.files[0]);
     }
 }
+
 saveButton.addEventListener('click', function(){
-    console.log(notvalid());
-    
-    countruns ++
     // Validation filter
     if (notvalid()) {
-        console.log("");
-    console.log(countruns,") inside validalert:");
-    console.log("name: ",!isString.test(studentName.value)," email: ", !emailSyntax.test(email.value)," number: ", !isDigit.test(contact.value)," date: ", !birthdate.value);
-        validationAlert()
+        validationAlert();
     } else {
-    saveStudentForm();
-
-    // Reset input value
-    // studentName.value = "";
-    // birthdate.value = "";
-    // email.value = "";
-    // contact.value = "";
+        modalEl.setAttribute('style','display:block');
+        pElement.textContent = "Confirm changes?"
+        confirmButton.setAttribute('style','display:block;');
+        cancelButton.setAttribute('style','display:block;');
+    
     }
 });
+
+confirmButton.addEventListener('click', function(){    
+    saveStudentForm();
+    pElement.textContent = "Changes confrimed ✅"
+    cancelButton.setAttribute('style','display:none;');
+    confirmButton.setAttribute('style','display:none;');
+});
+
+closeButton.addEventListener('click',function () {
+modalEl.setAttribute('style','display:none;');
+})
+cancelButton.addEventListener('click',function () {
+modalEl.setAttribute('style','display:none;');
+})
 
 studentInfoBtn.addEventListener('click', goToStudentInfo);
